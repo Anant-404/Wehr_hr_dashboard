@@ -5,13 +5,23 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+
+const data = [
+  { name: "Men", value: 6 },
+  { name: "Women", value: 10 },
+];
+const dataEmployees = [
+  { name: "Men", value: 120 },
+  { name: "Women", value: 96 },
+];
 
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <div  className={`fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-6 transition-transform duration-300 
+      <div  className={`fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-6 transition-transform duration-300 z-50
         ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-2">
@@ -112,7 +122,7 @@ export default function Dashboard() {
             </div>
             <button className="relative p-2 text-gray-400 hover:text-gray-600">
               <svg
-                className="h-6 w-6"
+                className="h-5 w-5 sm:h-6 sm:w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -133,8 +143,8 @@ export default function Dashboard() {
                  className="h-8 w-8 sm:h-10 sm:w-10 rounded-full"
               />
               <div>
-                <p className="font-medium">Admira John</p>
-                <p className="text-sm text-gray-500">HR Manager</p>
+                <p className="text-sm md:font-medium">Admira John</p>
+                <p className="hidden sm:block text-sm text-gray-500">HR Manager</p>
               </div>
             </div>
           </div>
@@ -187,9 +197,13 @@ export default function Dashboard() {
              </div>
              <div className="flex justify-between items-center">
                <p className="text-sm text-gray-400">Today you made 12 Activities</p>
-               <Button variant="outline" className="text-white border-white hover:bg-white/10">
+               <Button
+                  variant="outline"
+                  className="bg-red-500 text-white hover:bg-red-600 border-red-500 hover:border-red-600"
+                >
                  See All Activity
                </Button>
+
              </div>
            </Card>
 
@@ -207,7 +221,15 @@ export default function Dashboard() {
                    <p>96 Women</p>
                  </div>
                </div>
-               <div className="h-16 w-32 bg-red-50 rounded-lg"></div>
+
+               <div className="h-32 w-48 bg-red-50 rounded-lg overflow-hidden">
+                 <ResponsiveContainer width="100%" height="100%">
+                   <LineChart data={dataEmployees}>
+                     <Tooltip />
+                     <Line type="monotone" dataKey="value" stroke="#DC2626" strokeWidth={2} dot={false} />
+                   </LineChart>
+                 </ResponsiveContainer>
+               </div>
              </div>
            </Card>
          
@@ -224,11 +246,20 @@ export default function Dashboard() {
                    <p>10 Women</p>
                  </div>
                </div>
-               <div className="h-16 w-32 bg-blue-50 rounded-lg"></div>
+       
+               <div className="h-32 w-48 bg-blue-50 rounded-lg overflow-hidden">
+                 <ResponsiveContainer width="100%" height="100%">
+                   <LineChart data={data}>
+                     <XAxis dataKey="name" hide />
+                     <YAxis hide />
+                     <Tooltip />
+                     <Line type="monotone" dataKey="value" stroke="#2563EB" strokeWidth={2} dot={false} />
+                   </LineChart>
+                 </ResponsiveContainer>
+               </div>
              </div>
-           </Card>
-           
-         </div>
+           </Card>          
+    </div>
 
 
 {/* Bottom Grid */}
@@ -239,7 +270,7 @@ export default function Dashboard() {
       <div className="flex items-center justify-between w-full">
         <h2 className="text-xl font-bold">Announcement</h2>
         <div className="flex items-center gap-2">
-          <p className="text-sm text-gray-500">Today, 13 Sep 2021</p>
+          <p className="hidden sm:block text-sm text-gray-500">Today, 13 Sep 2021</p>
           <Button variant="outline">See All</Button>
         </div>
       </div>
@@ -280,7 +311,8 @@ export default function Dashboard() {
              </div>
              <div className="flex justify-between items-center">
                <p className="text-sm text-gray-400">Today you made 12 Activities</p>
-               <Button variant="outline" className="text-white border-white hover:bg-white/10">
+               <Button  variant="outline"
+                  className="bg-red-500 text-white hover:bg-red-600 border-red-500 hover:border-red-600">
                  See All Activity
                </Button>
              </div>
@@ -292,7 +324,7 @@ export default function Dashboard() {
       <div className="flex items-center justify-between w-full">
         <h2 className="text-xl font-bold">Upcoming Schedule</h2>
         <div className="flex items-center gap-2">
-          <p className="text-sm text-gray-500">Today, 13 Sep 2021</p>
+          <p className="hidden sm:text-sm text-gray-500">Today, 13 Sep 2021</p>
           <Button variant="outline">Create New</Button>
         </div>
       </div>
