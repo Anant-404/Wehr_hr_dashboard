@@ -195,7 +195,7 @@ export default function Dashboard() {
                  Kindly check the requirements and terms of work and make sure everything is right.
                </p>
              </div>
-             <div className="flex justify-between items-center">
+             <div className="flex justify-between items-center lg:py-6">
                <p className="text-sm text-gray-400">Today you made 12 Activities</p>
                <Button
                   variant="outline"
@@ -222,7 +222,7 @@ export default function Dashboard() {
                  </div>
                </div>
 
-               <div className="h-32 w-48 bg-red-50 rounded-lg overflow-hidden">
+               <div className="h-20 w-48 bg-red-50 rounded-lg overflow-hidden">
                  <ResponsiveContainer width="100%" height="100%">
                    <LineChart data={dataEmployees}>
                      <Tooltip />
@@ -247,7 +247,7 @@ export default function Dashboard() {
                  </div>
                </div>
        
-               <div className="h-32 w-48 bg-blue-50 rounded-lg overflow-hidden">
+               <div className="h-20 w-48 bg-blue-50 rounded-lg overflow-hidden">
                  <ResponsiveContainer width="100%" height="100%">
                    <LineChart data={data}>
                      <XAxis dataKey="name" hide />
